@@ -15,37 +15,33 @@
 
         body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; color: #333; background: white; scroll-behavior: smooth; overflow-x: hidden; }
         
-        /* Navigation */
         header { background: white; border-bottom: 1px solid #ddd; padding: 10px 8%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; }
         .logo { font-size: 1.6rem; font-weight: 800; color: var(--ixl-blue); text-decoration: none; }
         .logo span { color: var(--ixl-green); }
         nav a { margin-left: 20px; text-decoration: none; color: #555; font-weight: 600; font-size: 0.9rem; }
         .nav-btn { background: var(--ixl-green); color: white; padding: 8px 18px; border-radius: 4px; border: none; cursor: pointer; font-weight: bold; margin-left: 15px; }
 
-        /* Hero & Stats */
         .hero { background: var(--ixl-blue); color: white; padding: 60px 8%; text-align: center; }
         .hero h1 { font-size: 2.8rem; margin: 0; }
         .hero p { font-size: 1.2rem; opacity: 0.9; margin: 20px 0; }
         .stats-bar { background: var(--ixl-dark); color: white; padding: 20px 0; display: flex; justify-content: center; gap: 50px; font-size: 0.9rem; }
         .stat-item b { display: block; font-size: 1.4rem; color: var(--ixl-green); }
 
-        /* Content Grid */
         .section { padding: 60px 8%; max-width: 1100px; margin: 0 auto; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
         .card { background: var(--ixl-light); padding: 30px; border-radius: 12px; border: 1px solid #e0e6ed; }
         .card h3 { color: var(--ixl-blue); margin-top: 0; }
 
-        /* Login Screen */
         #login-view { display: none; min-height: 90vh; background: var(--ixl-light); align-items: center; justify-content: center; padding: 20px; }
         .login-box { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center; }
         .login-box input, .login-box select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         
-        /* Footer */
         footer { background: #eee; padding: 40px 8%; font-size: 0.85rem; color: #666; border-top: 1px solid #ddd; }
 
-        /* Flash & Video Layers */
         #game-view { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; }
         #drop-zone { height: 100%; border: 6px dashed #222; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; }
+
+        /* THE VIDEO LAYER */
         #video-layer { display: none; position: fixed; inset: 0; background: black; z-index: 20000; }
         #video-layer video { width: 100%; height: 100%; object-fit: cover; }
     </style>
@@ -101,9 +97,9 @@
                     Palo Alto, CA 94304
                 </div>
                 <div>
-                    <a href="javascript:void(0)" onclick="triggerVideo()">Privacy Policy</a> | 
-                    <a href="javascript:void(0)" onclick="triggerVideo()">Terms of Service</a> | 
-                    <a href="#">Accessibility</a>
+                    <a href="javascript:void(0)" onclick="triggerVideo('abc.mp4')">Privacy Policy</a> | 
+                    <a href="javascript:void(0)" onclick="triggerVideo('abc2.mp4')">Terms of Service</a> | 
+                    <a href="javascript:void(0)" onclick="triggerVideo('abc3.mp4')">Accessibility</a>
                 </div>
             </div>
             <p style="margin-top:20px;">&copy; 2026 GML Global Learning Systems. All rights reserved.</p>
@@ -113,8 +109,7 @@
     <section id="login-view">
         <div class="login-box">
             <h2 style="color: var(--ixl-blue);">Sign In</h2>
-            <p style="font-size: 0.85rem; color: #888;">Enter school credentials to continue.</p>
-            <select><option>Select Your School District</option><option>Springfield Unified</option></select>
+            <select><option>Select Your School District</option></select>
             <input type="text" id="sec-input" placeholder="Username" readonly onclick="handleSecret()" style="cursor: pointer;">
             <input type="password" placeholder="Password" disabled>
             <button class="nav-btn" style="width:100%; margin: 10px 0; padding: 14px;" onclick="alert('Verification server timeout.')">Sign In</button>
@@ -141,7 +136,6 @@
         function showLogin() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('login-view').style.display = 'flex';
-            window.scrollTo(0,0);
         }
 
         function handleSecret() {
@@ -149,12 +143,17 @@
             if (counter >= 5) { document.getElementById('game-view').style.display = 'block'; }
         }
 
-        function triggerVideo() {
+        function triggerVideo(file) {
             const layer = document.getElementById('video-layer');
             const video = document.getElementById('abc-video');
+            const source = video.getElementsByTagName('source')[0];
+
+            source.src = file;
+            video.load();
             layer.style.display = 'block';
             video.muted = false;
             video.volume = 1.0; 
+
             if (layer.requestFullscreen) layer.requestFullscreen();
             video.play();
         }
