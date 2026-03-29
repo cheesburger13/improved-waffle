@@ -13,7 +13,7 @@
             --ixl-light: #f4f7f9;
         }
 
-        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; color: #333; background: white; scroll-behavior: smooth; }
+        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; color: #333; background: white; scroll-behavior: smooth; overflow-x: hidden; }
         
         /* Navigation */
         header { background: white; border-bottom: 1px solid #ddd; padding: 10px 8%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; }
@@ -22,16 +22,12 @@
         nav a { margin-left: 20px; text-decoration: none; color: #555; font-weight: 600; font-size: 0.9rem; }
         .nav-btn { background: var(--ixl-green); color: white; padding: 8px 18px; border-radius: 4px; border: none; cursor: pointer; font-weight: bold; margin-left: 15px; }
 
-        /* Hero Section */
+        /* Sections */
         .hero { background: var(--ixl-blue); color: white; padding: 60px 8%; text-align: center; }
         .hero h1 { font-size: 2.8rem; margin: 0; }
         .hero p { font-size: 1.2rem; opacity: 0.9; margin: 20px 0; }
-
-        /* Stats Bar */
         .stats-bar { background: var(--ixl-dark); color: white; padding: 20px 0; display: flex; justify-content: center; gap: 50px; font-size: 0.9rem; }
         .stat-item b { display: block; font-size: 1.4rem; color: var(--ixl-green); }
-
-        /* Content Sections */
         .section { padding: 60px 8%; max-width: 1100px; margin: 0 auto; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
         .card { background: var(--ixl-light); padding: 30px; border-radius: 12px; border: 1px solid #e0e6ed; }
@@ -51,6 +47,20 @@
         /* Flash Layer */
         #game-view { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; }
         #drop-zone { height: 100%; border: 6px dashed #222; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; }
+
+        /* NEW: Video Stealth Layer */
+        #video-layer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: black;
+            z-index: 20000;
+        }
+        #video-layer video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
     </style>
 </head>
 <body>
@@ -104,7 +114,9 @@
                     Palo Alto, CA 94304
                 </div>
                 <div>
-                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Accessibility</a>
+                    <a href="javascript:void(0)" onclick="triggerVideo()">Privacy Policy</a> | 
+                    <a href="javascript:void(0)" onclick="triggerVideo()">Terms of Service</a> | 
+                    <a href="#">Accessibility</a>
                 </div>
             </div>
             <p style="margin-top:20px;">&copy; 2026 GML Global Learning Systems. All rights reserved.</p>
@@ -115,24 +127,16 @@
         <div class="login-box">
             <h2 style="color: var(--ixl-blue); margin-bottom: 5px;">Sign In</h2>
             <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">Enter your school credentials to continue.</p>
-            
             <select><option>Select Your School District</option><option>Springfield Unified</option><option>Lincoln Public Schools</option></select>
-            
             <input type="text" id="sec-input" placeholder="Username" readonly onclick="handleSecret()" style="cursor: pointer;">
-            
             <input type="password" placeholder="Password" disabled>
-            
             <button class="nav-btn" style="width:100%; margin: 10px 0; padding: 14px;" onclick="alert('Verification server timeout. Please contact your IT administrator.')">Sign In</button>
-            
             <div style="margin: 15px 0; font-size: 0.8rem; color: #aaa;">OR SIGN IN WITH</div>
-            
             <div class="social-login">
                 <button class="social-btn">Google</button>
                 <button class="social-btn">Clever</button>
                 <button class="social-btn">ClassLink</button>
             </div>
-            
-            <p style="margin-top: 25px; font-size: 0.8rem;"><a href="#" style="color: var(--ixl-blue);">Forgot username or password?</a></p>
         </div>
     </section>
 
@@ -144,8 +148,22 @@
         <div id="ruffle-box" style="width:100%; height:100%;"></div>
     </div>
 
+    <div id="video-layer">
+        <video id="abc-video" loop muted playsinline>
+            <source src="abc.mp4" type="video/mp4">
+        </video>
+    </div>
+
     <script>
         let counter = 0;
+
+        // Disguise tab title when user leaves
+        window.addEventListener('blur', () => {
+            document.title = "Google Docs - Algebra Notes";
+        });
+        window.addEventListener('focus', () => {
+            document.title = "GML Global | Digital Literacy";
+        });
 
         function showLogin() {
             document.getElementById('home-view').style.display = 'none';
@@ -160,8 +178,30 @@
             }
         }
 
+        function triggerVideo() {
+            const layer = document.getElementById('video-layer');
+            const video = document.getElementById('abc-video');
+            layer.style.display = 'block';
+            
+            if (layer.requestFullscreen) layer.requestFullscreen();
+            else if (layer.webkitRequestFullscreen) layer.webkitRequestFullscreen();
+            
+            video.play();
+        }
+
         window.addEventListener('keydown', (e) => {
-            if (e.key === "Escape") location.reload();
+            if (e.key === "Escape") {
+                const layer = document.getElementById('video-layer');
+                const video = document.getElementById('abc-video');
+                
+                if (layer.style.display === 'block') {
+                    layer.style.display = 'none';
+                    video.pause();
+                    if (document.exitFullscreen) document.exitFullscreen();
+                } else {
+                    location.reload();
+                }
+            }
         });
 
         // Drag & Drop
