@@ -3,104 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Testimonials | GML Learning Portal</title>
+    <title>GML Global | Digital Literacy & Math Readiness</title>
     <script src="FlashPlayer/ruffle.js"></script>
     <style>
-        /* Force display and colors */
         :root {
             --ixl-green: #51B700;
             --ixl-blue: #0073BB;
-            --ixl-bg: #F9F9F9;
+            --ixl-dark: #2c3e50;
+            --ixl-light: #f4f7f9;
         }
 
-        body, html { 
-            margin: 0; 
-            padding: 0; 
-            width: 100%;
-            height: 100%; 
-            background-color: white !important; 
-            color: #333;
-            font-family: Arial, sans-serif;
-        }
-
-        header { 
-            background: white; 
-            border-bottom: 1px solid #e0e0e0; 
-            padding: 15px 10%; 
-            display: flex; 
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo { font-size: 24px; font-weight: bold; color: var(--ixl-blue); }
-        .logo span { color: var(--ixl-green); }
-
-        .btn-green { 
-            background: var(--ixl-green); 
-            color: white; 
-            padding: 10px 20px; 
-            border: none; 
-            border-radius: 4px; 
-            font-weight: bold; 
-            cursor: pointer; 
-        }
-
-        #about-content { padding: 40px 10%; display: block; }
+        body, html { margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, sans-serif; color: #333; background: white; scroll-behavior: smooth; }
         
-        .card { 
-            background: var(--ixl-bg); 
-            padding: 20px; 
-            border-radius: 8px; 
-            border: 1px solid #ddd; 
-            margin-bottom: 20px; 
-        }
+        /* Navigation */
+        header { background: white; border-bottom: 1px solid #ddd; padding: 10px 8%; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--ixl-blue); text-decoration: none; }
+        .logo span { color: var(--ixl-green); }
+        nav a { margin-left: 20px; text-decoration: none; color: #555; font-weight: 600; font-size: 0.9rem; }
+        .nav-btn { background: var(--ixl-green); color: white; padding: 8px 18px; border-radius: 4px; border: none; cursor: pointer; font-weight: bold; margin-left: 15px; }
 
-        /* Hidden Sections */
-        #login-section, #flash-section { display: none; }
+        /* Hero Section */
+        .hero { background: var(--ixl-blue); color: white; padding: 60px 8%; text-align: center; }
+        .hero h1 { font-size: 2.8rem; margin: 0; }
+        .hero p { font-size: 1.2rem; opacity: 0.9; margin: 20px 0; }
 
+        /* Stats Bar */
+        .stats-bar { background: var(--ixl-dark); color: white; padding: 20px 0; display: flex; justify-content: center; gap: 50px; font-size: 0.9rem; }
+        .stat-item b { display: block; font-size: 1.4rem; color: var(--ixl-green); }
+
+        /* Content Sections */
+        .section { padding: 60px 8%; max-width: 1100px; margin: 0 auto; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
+        .card { background: var(--ixl-light); padding: 30px; border-radius: 12px; border: 1px solid #e0e6ed; }
+        .card h3 { color: var(--ixl-blue); margin-top: 0; }
+
+        /* Login Screen */
+        #login-view { display: none; min-height: 90vh; background: var(--ixl-light); align-items: center; justify-content: center; padding: 20px; }
+        .login-box { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center; }
+        .login-box input, .login-box select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        .social-login { display: flex; gap: 10px; margin-top: 20px; }
+        .social-btn { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: white; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 5px; }
+
+        /* Footer */
+        footer { background: #eee; padding: 40px 8%; font-size: 0.85rem; color: #666; border-top: 1px solid #ddd; }
+        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
+
+        /* Flash Layer */
+        #game-view { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; }
+        #drop-zone { height: 100%; border: 6px dashed #222; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">GML<span>Learning</span></div>
-        <button class="btn-green" onclick="showLogin()">Sign in</button>
+        <a href="#" class="logo" onclick="location.reload()">GML<span>Global</span></a>
+        <nav>
+            <a href="#curriculum">Curriculum</a>
+            <a href="#impact">Impact</a>
+            <a href="#">Resources</a>
+            <button class="nav-btn" onclick="showLogin()">Sign In</button>
+        </nav>
     </header>
 
-    <div id="about-content">
-        <h1 style="text-align:center;">What Educators Are Saying</h1>
-        <div class="card">
-            <p>"The GML Learning Portal has been a staple in my classroom for years."</p>
-            <p><strong>- Principal Peterson</strong></p>
-        </div>
-    </div>
+    <main id="home-view">
+        <section class="hero">
+            <h1>Comprehensive K-12 Digital Excellence</h1>
+            <p>Adaptive learning paths designed to bridge the digital divide for over 20 million students.</p>
+            <button class="nav-btn" style="padding: 15px 40px; font-size: 1.1rem;" onclick="showLogin()">Get Started Today</button>
+        </section>
 
-    <div id="login-section" style="height: 80vh; display: none; align-items: center; justify-content: center;">
-        <div style="border: 1px solid #ccc; padding: 30px; border-radius: 5px; background: white; text-align: center;">
-            <h2 style="color: var(--ixl-blue);">Sign in</h2>
-            <input type="text" id="secret-field" placeholder="Username" onclick="checkSecret()" readonly style="padding: 10px; width: 200px;">
+        <div class="stats-bar">
+            <div class="stat-item"><b>45,000+</b> Schools Active</div>
+            <div class="stat-item"><b>1.2 Billion</b> Skills Answered</div>
+            <div class="stat-item"><b>98%</b> Teacher Approval</div>
         </div>
-    </div>
 
-    <div id="flash-section" style="display:none; position: fixed; top:0; left:0; width:100%; height:100%; background:black; z-index:9999;">
-        <div id="drop-target" style="height:100%; color: #444; display:flex; align-items:center; justify-content:center; border: 5px dashed #222;">
-            <h2>Drop Module (.swf)</h2>
+        <section class="section" id="curriculum">
+            <h2 style="text-align:center; color: var(--ixl-dark);">Curriculum Built for Success</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>Legacy Content Support</h3>
+                    <p>Our proprietary engine allows schools to run legacy interactive media (2000-2020) with modern hardware acceleration.</p>
+                </div>
+                <div class="card">
+                    <h3>Differentiated Instruction</h3>
+                    <p>Real-time analytics that pinpoint exactly where students need help in their digital literacy journey.</p>
+                </div>
+                <div class="card">
+                    <h3>District-Wide Scaling</h3>
+                    <p>Cloud-based architecture that supports simultaneous access for entire school districts without lag.</p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-grid">
+                <div>
+                    <b>GML Foundation</b><br>
+                    1200 Education Way<br>
+                    Palo Alto, CA 94304
+                </div>
+                <div>
+                    <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a> | <a href="#">Accessibility</a>
+                </div>
+            </div>
+            <p style="margin-top:20px;">&copy; 2026 GML Global Learning Systems. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <section id="login-view">
+        <div class="login-box">
+            <h2 style="color: var(--ixl-blue); margin-bottom: 5px;">Sign In</h2>
+            <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">Enter your school credentials to continue.</p>
+            
+            <select><option>Select Your School District</option><option>Springfield Unified</option><option>Lincoln Public Schools</option></select>
+            
+            <input type="text" id="sec-input" placeholder="Username" readonly onclick="handleSecret()" style="cursor: pointer;">
+            
+            <input type="password" placeholder="Password" disabled>
+            
+            <button class="nav-btn" style="width:100%; margin: 10px 0; padding: 14px;" onclick="alert('Verification server timeout. Please contact your IT administrator.')">Sign In</button>
+            
+            <div style="margin: 15px 0; font-size: 0.8rem; color: #aaa;">OR SIGN IN WITH</div>
+            
+            <div class="social-login">
+                <button class="social-btn">Google</button>
+                <button class="social-btn">Clever</button>
+                <button class="social-btn">ClassLink</button>
+            </div>
+            
+            <p style="margin-top: 25px; font-size: 0.8rem;"><a href="#" style="color: var(--ixl-blue);">Forgot username or password?</a></p>
         </div>
-        <div id="ruffle-container"></div>
+    </section>
+
+    <div id="game-view">
+        <div id="drop-zone">
+            <h1>MODULE INITIALIZED</h1>
+            <p>Ready to load local asset package (.swf)</p>
+        </div>
+        <div id="ruffle-box" style="width:100%; height:100%;"></div>
     </div>
 
     <script>
-        let clicks = 0;
+        let counter = 0;
 
         function showLogin() {
-            document.getElementById('about-content').style.display = 'none';
-            document.getElementById('login-section').style.display = 'flex';
+            document.getElementById('home-view').style.display = 'none';
+            document.getElementById('login-view').style.display = 'flex';
+            window.scrollTo(0,0);
         }
 
-        function checkSecret() {
-            clicks++;
-            if (clicks >= 5) {
-                document.getElementById('flash-section').style.display = 'block';
+        function handleSecret() {
+            counter++;
+            if (counter >= 5) {
+                document.getElementById('game-view').style.display = 'block';
             }
         }
 
@@ -108,16 +164,16 @@
             if (e.key === "Escape") location.reload();
         });
 
-        // Drag and Drop Logic
+        // Drag & Drop
         window.addEventListener('dragover', (e) => e.preventDefault());
         window.addEventListener('drop', (e) => {
             e.preventDefault();
             const file = e.dataTransfer.files[0];
-            if (file && file.name.endsWith('.swf')) {
-                document.getElementById('drop-target').style.display = 'none';
+            if (file && file.name.toLowerCase().endsWith('.swf')) {
+                document.getElementById('drop-zone').style.display = 'none';
                 const ruffle = window.RufflePlayer.newest();
                 const player = ruffle.createPlayer();
-                document.getElementById('ruffle-container').appendChild(player);
+                document.getElementById('ruffle-box').appendChild(player);
                 player.load({ url: URL.createObjectURL(file), autoplay: "on" });
             }
         });
