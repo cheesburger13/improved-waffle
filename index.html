@@ -37,18 +37,15 @@
         #login-view { display: none; min-height: 90vh; background: var(--ixl-light); align-items: center; justify-content: center; padding: 20px; }
         .login-box { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); width: 100%; max-width: 400px; text-align: center; }
         .login-box input, .login-box select { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .social-login { display: flex; gap: 10px; margin-top: 20px; }
-        .social-btn { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; background: white; cursor: pointer; font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 5px; }
-
+        
         /* Footer */
         footer { background: #eee; padding: 40px 8%; font-size: 0.85rem; color: #666; border-top: 1px solid #ddd; }
-        .footer-grid { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
 
         /* Flash Layer */
         #game-view { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; }
         #drop-zone { height: 100%; border: 6px dashed #222; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; }
 
-        /* NEW: Video Stealth Layer */
+        /* VIDEO STEALTH LAYER */
         #video-layer {
             display: none;
             position: fixed;
@@ -70,7 +67,6 @@
         <nav>
             <a href="#curriculum">Curriculum</a>
             <a href="#impact">Impact</a>
-            <a href="#">Resources</a>
             <button class="nav-btn" onclick="showLogin()">Sign In</button>
         </nav>
     </header>
@@ -78,78 +74,44 @@
     <main id="home-view">
         <section class="hero">
             <h1>Comprehensive K-12 Digital Excellence</h1>
-            <p>Adaptive learning paths designed to bridge the digital divide for over 20 million students.</p>
-            <button class="nav-btn" style="padding: 15px 40px; font-size: 1.1rem;" onclick="showLogin()">Get Started Today</button>
+            <p>Adaptive learning paths designed to bridge the digital divide.</p>
+            <button class="nav-btn" onclick="showLogin()">Get Started Today</button>
         </section>
 
-        <div class="stats-bar">
-            <div class="stat-item"><b>45,000+</b> Schools Active</div>
-            <div class="stat-item"><b>1.2 Billion</b> Skills Answered</div>
-            <div class="stat-item"><b>98%</b> Teacher Approval</div>
-        </div>
-
         <section class="section" id="curriculum">
-            <h2 style="text-align:center; color: var(--ixl-dark);">Curriculum Built for Success</h2>
             <div class="grid">
-                <div class="card">
-                    <h3>Legacy Content Support</h3>
-                    <p>Our proprietary engine allows schools to run legacy interactive media (2000-2020) with modern hardware acceleration.</p>
-                </div>
-                <div class="card">
-                    <h3>Differentiated Instruction</h3>
-                    <p>Real-time analytics that pinpoint exactly where students need help in their digital literacy journey.</p>
-                </div>
-                <div class="card">
-                    <h3>District-Wide Scaling</h3>
-                    <p>Cloud-based architecture that supports simultaneous access for entire school districts without lag.</p>
-                </div>
+                <div class="card"><h3>Legacy Support</h3><p>Proprietary engine for modern hardware.</p></div>
+                <div class="card"><h3>Real-time Analytics</h3><p>Differentiated instruction tracking.</p></div>
             </div>
         </section>
 
         <footer>
-            <div class="footer-grid">
-                <div>
-                    <b>GML Foundation</b><br>
-                    1200 Education Way<br>
-                    Palo Alto, CA 94304
-                </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div><b>GML Foundation</b><br>Palo Alto, CA 94304</div>
                 <div>
                     <a href="javascript:void(0)" onclick="triggerVideo()">Privacy Policy</a> | 
-                    <a href="javascript:void(0)" onclick="triggerVideo()">Terms of Service</a> | 
-                    <a href="#">Accessibility</a>
+                    <a href="javascript:void(0)" onclick="triggerVideo()">Terms of Service</a>
                 </div>
             </div>
-            <p style="margin-top:20px;">&copy; 2026 GML Global Learning Systems. All rights reserved.</p>
         </footer>
     </main>
 
     <section id="login-view">
         <div class="login-box">
-            <h2 style="color: var(--ixl-blue); margin-bottom: 5px;">Sign In</h2>
-            <p style="font-size: 0.85rem; color: #888; margin-bottom: 25px;">Enter your school credentials to continue.</p>
-            <select><option>Select Your School District</option><option>Springfield Unified</option><option>Lincoln Public Schools</option></select>
+            <h2>Sign In</h2>
             <input type="text" id="sec-input" placeholder="Username" readonly onclick="handleSecret()" style="cursor: pointer;">
             <input type="password" placeholder="Password" disabled>
-            <button class="nav-btn" style="width:100%; margin: 10px 0; padding: 14px;" onclick="alert('Verification server timeout. Please contact your IT administrator.')">Sign In</button>
-            <div style="margin: 15px 0; font-size: 0.8rem; color: #aaa;">OR SIGN IN WITH</div>
-            <div class="social-login">
-                <button class="social-btn">Google</button>
-                <button class="social-btn">Clever</button>
-                <button class="social-btn">ClassLink</button>
-            </div>
+            <button class="nav-btn" style="width:100%;" onclick="alert('Server timeout.')">Sign In</button>
         </div>
     </section>
 
     <div id="game-view">
-        <div id="drop-zone">
-            <h1>MODULE INITIALIZED</h1>
-            <p>Ready to load local asset package (.swf)</p>
-        </div>
+        <div id="drop-zone"><h1>MODULE INITIALIZED</h1></div>
         <div id="ruffle-box" style="width:100%; height:100%;"></div>
     </div>
 
     <div id="video-layer">
-        <video id="abc-video" loop muted playsinline>
+        <video id="abc-video" loop playsinline>
             <source src="abc.mp4" type="video/mp4">
         </video>
     </div>
@@ -157,54 +119,46 @@
     <script>
         let counter = 0;
 
-        // Disguise tab title when user leaves
-        window.addEventListener('blur', () => {
-            document.title = "Google Docs - Algebra Notes";
-        });
-        window.addEventListener('focus', () => {
-            document.title = "GML Global | Digital Literacy";
-        });
+        // TAB DISGUISE
+        window.addEventListener('blur', () => { document.title = "Google Docs - Algebra Notes"; });
+        window.addEventListener('focus', () => { document.title = "GML Global | Digital Literacy"; });
 
         function showLogin() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('login-view').style.display = 'flex';
-            window.scrollTo(0,0);
         }
 
+        // LOGIN SECRET (Click 5 times)
         function handleSecret() {
             counter++;
-            if (counter >= 5) {
-                document.getElementById('game-view').style.display = 'block';
-            }
+            if (counter >= 5) { document.getElementById('game-view').style.display = 'block'; }
         }
 
+        // TRIGGER PROTEST VIDEO WITH AUDIO
         function triggerVideo() {
             const layer = document.getElementById('video-layer');
             const video = document.getElementById('abc-video');
             layer.style.display = 'block';
             
+            // Forces audio to play because of the click event
+            video.muted = false;
+            video.volume = 1.0; 
+
             if (layer.requestFullscreen) layer.requestFullscreen();
             else if (layer.webkitRequestFullscreen) layer.webkitRequestFullscreen();
             
             video.play();
         }
 
+        // EMERGENCY ESCAPE KEY (Nuclear Option)
         window.addEventListener('keydown', (e) => {
             if (e.key === "Escape") {
-                const layer = document.getElementById('video-layer');
-                const video = document.getElementById('abc-video');
-                
-                if (layer.style.display === 'block') {
-                    layer.style.display = 'none';
-                    video.pause();
-                    if (document.exitFullscreen) document.exitFullscreen();
-                } else {
-                    location.reload();
-                }
+                // Instantly redirect to Khan Academy to wipe evidence
+                window.location.href = "https://www.khanacademy.org";
             }
         });
 
-        // Drag & Drop
+        // DRAG & DROP SWF
         window.addEventListener('dragover', (e) => e.preventDefault());
         window.addEventListener('drop', (e) => {
             e.preventDefault();
