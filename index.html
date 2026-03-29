@@ -22,12 +22,14 @@
         nav a { margin-left: 20px; text-decoration: none; color: #555; font-weight: 600; font-size: 0.9rem; }
         .nav-btn { background: var(--ixl-green); color: white; padding: 8px 18px; border-radius: 4px; border: none; cursor: pointer; font-weight: bold; margin-left: 15px; }
 
-        /* Sections */
+        /* Hero & Stats */
         .hero { background: var(--ixl-blue); color: white; padding: 60px 8%; text-align: center; }
         .hero h1 { font-size: 2.8rem; margin: 0; }
         .hero p { font-size: 1.2rem; opacity: 0.9; margin: 20px 0; }
         .stats-bar { background: var(--ixl-dark); color: white; padding: 20px 0; display: flex; justify-content: center; gap: 50px; font-size: 0.9rem; }
         .stat-item b { display: block; font-size: 1.4rem; color: var(--ixl-green); }
+
+        /* Content Grid */
         .section { padding: 60px 8%; max-width: 1100px; margin: 0 auto; }
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 40px; }
         .card { background: var(--ixl-light); padding: 30px; border-radius: 12px; border: 1px solid #e0e6ed; }
@@ -41,23 +43,11 @@
         /* Footer */
         footer { background: #eee; padding: 40px 8%; font-size: 0.85rem; color: #666; border-top: 1px solid #ddd; }
 
-        /* Flash Layer */
+        /* Flash & Video Layers */
         #game-view { display: none; position: fixed; inset: 0; background: #000; z-index: 10000; }
         #drop-zone { height: 100%; border: 6px dashed #222; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #444; }
-
-        /* VIDEO STEALTH LAYER */
-        #video-layer {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: black;
-            z-index: 20000;
-        }
-        #video-layer video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        #video-layer { display: none; position: fixed; inset: 0; background: black; z-index: 20000; }
+        #video-layer video { width: 100%; height: 100%; object-fit: cover; }
     </style>
 </head>
 <body>
@@ -67,6 +57,7 @@
         <nav>
             <a href="#curriculum">Curriculum</a>
             <a href="#impact">Impact</a>
+            <a href="#">Resources</a>
             <button class="nav-btn" onclick="showLogin()">Sign In</button>
         </nav>
     </header>
@@ -74,39 +65,64 @@
     <main id="home-view">
         <section class="hero">
             <h1>Comprehensive K-12 Digital Excellence</h1>
-            <p>Adaptive learning paths designed to bridge the digital divide.</p>
-            <button class="nav-btn" onclick="showLogin()">Get Started Today</button>
+            <p>Adaptive learning paths designed to bridge the digital divide for over 20 million students.</p>
+            <button class="nav-btn" style="padding: 15px 40px; font-size: 1.1rem;" onclick="showLogin()">Get Started Today</button>
         </section>
 
+        <div class="stats-bar">
+            <div class="stat-item"><b>45,000+</b> Schools Active</div>
+            <div class="stat-item"><b>1.2 Billion</b> Skills Answered</div>
+            <div class="stat-item"><b>98%</b> Teacher Approval</div>
+        </div>
+
         <section class="section" id="curriculum">
+            <h2 style="text-align:center; color: var(--ixl-dark);">Curriculum Built for Success</h2>
             <div class="grid">
-                <div class="card"><h3>Legacy Support</h3><p>Proprietary engine for modern hardware.</p></div>
-                <div class="card"><h3>Real-time Analytics</h3><p>Differentiated instruction tracking.</p></div>
+                <div class="card">
+                    <h3>Legacy Content Support</h3>
+                    <p>Our proprietary engine allows schools to run legacy interactive media (2000-2020) with modern hardware acceleration.</p>
+                </div>
+                <div class="card">
+                    <h3>Differentiated Instruction</h3>
+                    <p>Real-time analytics that pinpoint exactly where students need help in their digital literacy journey.</p>
+                </div>
+                <div class="card">
+                    <h3>District-Wide Scaling</h3>
+                    <p>Cloud-based architecture that supports simultaneous access for entire school districts without lag.</p>
+                </div>
             </div>
         </section>
 
         <footer>
-            <div style="display: flex; justify-content: space-between;">
-                <div><b>GML Foundation</b><br>Palo Alto, CA 94304</div>
+            <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                <div>
+                    <b>GML Foundation</b><br>
+                    1200 Education Way<br>
+                    Palo Alto, CA 94304
+                </div>
                 <div>
                     <a href="javascript:void(0)" onclick="triggerVideo()">Privacy Policy</a> | 
-                    <a href="javascript:void(0)" onclick="triggerVideo()">Terms of Service</a>
+                    <a href="javascript:void(0)" onclick="triggerVideo()">Terms of Service</a> | 
+                    <a href="#">Accessibility</a>
                 </div>
             </div>
+            <p style="margin-top:20px;">&copy; 2026 GML Global Learning Systems. All rights reserved.</p>
         </footer>
     </main>
 
     <section id="login-view">
         <div class="login-box">
-            <h2>Sign In</h2>
+            <h2 style="color: var(--ixl-blue);">Sign In</h2>
+            <p style="font-size: 0.85rem; color: #888;">Enter school credentials to continue.</p>
+            <select><option>Select Your School District</option><option>Springfield Unified</option></select>
             <input type="text" id="sec-input" placeholder="Username" readonly onclick="handleSecret()" style="cursor: pointer;">
             <input type="password" placeholder="Password" disabled>
-            <button class="nav-btn" style="width:100%;" onclick="alert('Server timeout.')">Sign In</button>
+            <button class="nav-btn" style="width:100%; margin: 10px 0; padding: 14px;" onclick="alert('Verification server timeout.')">Sign In</button>
         </div>
     </section>
 
     <div id="game-view">
-        <div id="drop-zone"><h1>MODULE INITIALIZED</h1></div>
+        <div id="drop-zone"><h1>MODULE INITIALIZED</h1><p>Ready to load local asset package (.swf)</p></div>
         <div id="ruffle-box" style="width:100%; height:100%;"></div>
     </div>
 
@@ -119,46 +135,37 @@
     <script>
         let counter = 0;
 
-        // TAB DISGUISE
         window.addEventListener('blur', () => { document.title = "Google Docs - Algebra Notes"; });
         window.addEventListener('focus', () => { document.title = "GML Global | Digital Literacy"; });
 
         function showLogin() {
             document.getElementById('home-view').style.display = 'none';
             document.getElementById('login-view').style.display = 'flex';
+            window.scrollTo(0,0);
         }
 
-        // LOGIN SECRET (Click 5 times)
         function handleSecret() {
             counter++;
             if (counter >= 5) { document.getElementById('game-view').style.display = 'block'; }
         }
 
-        // TRIGGER PROTEST VIDEO WITH AUDIO
         function triggerVideo() {
             const layer = document.getElementById('video-layer');
             const video = document.getElementById('abc-video');
             layer.style.display = 'block';
-            
-            // Forces audio to play because of the click event
             video.muted = false;
             video.volume = 1.0; 
-
             if (layer.requestFullscreen) layer.requestFullscreen();
-            else if (layer.webkitRequestFullscreen) layer.webkitRequestFullscreen();
-            
             video.play();
         }
 
-        // EMERGENCY ESCAPE KEY (Nuclear Option)
         window.addEventListener('keydown', (e) => {
             if (e.key === "Escape") {
-                // Instantly redirect to Khan Academy to wipe evidence
                 window.location.href = "https://www.khanacademy.org";
             }
         });
 
-        // DRAG & DROP SWF
+        // SWF Drop Logic
         window.addEventListener('dragover', (e) => e.preventDefault());
         window.addEventListener('drop', (e) => {
             e.preventDefault();
